@@ -7,14 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Mediator\Commands\OrderDetailCommands\" />
     <Folder Include="Features\Mediator\Commands\OrderingCommands\" />
-    <Folder Include="Features\Mediator\Handlers\OrderDetailHandlers\" />
-    <Folder Include="Features\Mediator\Handlers\OrderHandlers\" />
-    <Folder Include="Features\Mediator\Queries\OrderDetailQueries\" />
+    <Folder Include="Features\Mediator\Handlers\OrderingHandlers\" />
     <Folder Include="Features\Mediator\Queries\OrderingQueries\" />
     <Folder Include="Features\Mediator\Results\OrderingResults\" />
-    <Folder Include="Features\Mediator\Results\OrderDetailResults\" />
     <Folder Include="Features\Mediator\Commands\" />
     <Folder Include="Features\Mediator\Handlers\" />
     <Folder Include="Features\Mediator\Queries\" />
