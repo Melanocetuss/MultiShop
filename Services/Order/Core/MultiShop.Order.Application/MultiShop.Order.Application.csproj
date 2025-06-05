@@ -7,14 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Mediator\Commands\OrderingCommands\" />
-    <Folder Include="Features\Mediator\Handlers\OrderingHandlers\" />
-    <Folder Include="Features\Mediator\Queries\OrderingQueries\" />
-    <Folder Include="Features\Mediator\Results\OrderingResults\" />
-    <Folder Include="Features\Mediator\Commands\" />
-    <Folder Include="Features\Mediator\Handlers\" />
-    <Folder Include="Features\Mediator\Queries\" />
-    <Folder Include="Features\Mediator\Results\" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
