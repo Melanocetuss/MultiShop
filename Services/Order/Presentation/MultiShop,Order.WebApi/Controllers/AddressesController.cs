@@ -4,7 +4,7 @@ using MultiShop.Order.Application.Features.CQRS.Commands.AddressCommands;
 using MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers;
 using MultiShop.Order.Application.Features.CQRS.Queries.AddressQueries;
 
-namespace MultiShop_Order.WebApi.Controllers
+namespace MultiShop.Order.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
