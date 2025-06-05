@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Order.Application
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Order.Persistence", "Services\Order\Infrastructure\MultiShop.Order.Persistence\MultiShop.Order.Persistence.csproj", "{38AFB411-C192-41E1-9F45-3B6033D3ABA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop,Order.WebApi", "Services\Order\Presentation\MultiShop,Order.WebApi\MultiShop,Order.WebApi.csproj", "{52BBC8A3-27A0-4B77-8F49-9E0A75FA0F57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Order.WebApi", "Services\Order\Presentation\MultiShop,Order.WebApi\MultiShop.Order.WebApi.csproj", "{52BBC8A3-27A0-4B77-8F49-9E0A75FA0F57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
