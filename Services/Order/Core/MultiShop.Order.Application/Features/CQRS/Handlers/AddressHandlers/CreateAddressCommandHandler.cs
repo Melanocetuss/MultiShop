@@ -11,15 +11,15 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers
 {
     public class CreateAddressCommandHandler
     {
-        private readonly IRepository<Address> _addressRepository;
+        private readonly IRepository<Address> _repository;
         public CreateAddressCommandHandler(IRepository<Address> addressRepository)
         {
-            _addressRepository = addressRepository;
+            _repository = addressRepository;
         }
 
         public async Task Handle(CreateAddressCommand command)
         {
-            await _addressRepository.CreateAsync(new Address
+            await _repository.CreateAsync(new Address
             {
                 UserID = command.UserID,
                 District = command.District,
