@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.14.36202.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-	ProjectSection(SolutionItems) = preProject
-		PortNumbers.txt = PortNumbers.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{221D3183-6741-4314-95A3-132A199076DD}"
 EndProject
@@ -35,6 +32,18 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{F8EA7040-D8AE-4B7C-B2CA-61E7983A5022}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.IdentityServer", "IdentityServer\MultiShop.IdentityServer\MultiShop.IdentityServer.csproj", "{EA14094F-FB55-5ABC-1402-B4229C4AD0B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cargo", "Cargo", "{11A57DB0-619E-40B5-84C6-2CD0148FB0F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Cargo.EntitiesLayer", "Services\Cargo\MultiShop.Cargo.EntitiesLayer\MultiShop.Cargo.EntitiesLayer.csproj", "{3E75AF90-1C50-4EC4-A724-0DC52720E90A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Cargo.BusinessLayer", "Services\Cargo\MultiShop.Cargo.BusinessLayer\MultiShop.Cargo.BusinessLayer.csproj", "{67D3BA68-2015-4B74-8D9E-0F1A1C7760BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Cargo.DataAccessLayer", "Services\Cargo\MultiShop.Cargo.DataAccessLayer\MultiShop.Cargo.DataAccessLayer.csproj", "{EC8C857A-DE3E-4692-B358-78C39280767E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Cargo.DtoLayer", "Services\Cargo\MultiShop.Cargo.DtoLayer\MultiShop.Cargo.DtoLayer.csproj", "{BA8DC491-9714-4A50-B4B2-FB83803A9BF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Cargo.WebApi", "Services\Cargo\MultiShop.Cargo.WebApi\MultiShop.Cargo.WebApi.csproj", "{9D8D6BA5-5A84-4548-A636-CCD57995724C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +79,26 @@ Global
 		{EA14094F-FB55-5ABC-1402-B4229C4AD0B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA14094F-FB55-5ABC-1402-B4229C4AD0B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA14094F-FB55-5ABC-1402-B4229C4AD0B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E75AF90-1C50-4EC4-A724-0DC52720E90A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E75AF90-1C50-4EC4-A724-0DC52720E90A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E75AF90-1C50-4EC4-A724-0DC52720E90A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E75AF90-1C50-4EC4-A724-0DC52720E90A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67D3BA68-2015-4B74-8D9E-0F1A1C7760BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67D3BA68-2015-4B74-8D9E-0F1A1C7760BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67D3BA68-2015-4B74-8D9E-0F1A1C7760BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67D3BA68-2015-4B74-8D9E-0F1A1C7760BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC8C857A-DE3E-4692-B358-78C39280767E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC8C857A-DE3E-4692-B358-78C39280767E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC8C857A-DE3E-4692-B358-78C39280767E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC8C857A-DE3E-4692-B358-78C39280767E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA8DC491-9714-4A50-B4B2-FB83803A9BF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA8DC491-9714-4A50-B4B2-FB83803A9BF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA8DC491-9714-4A50-B4B2-FB83803A9BF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA8DC491-9714-4A50-B4B2-FB83803A9BF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D8D6BA5-5A84-4548-A636-CCD57995724C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D8D6BA5-5A84-4548-A636-CCD57995724C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D8D6BA5-5A84-4548-A636-CCD57995724C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D8D6BA5-5A84-4548-A636-CCD57995724C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +117,12 @@ Global
 		{38AFB411-C192-41E1-9F45-3B6033D3ABA3} = {155F60D1-5FD4-4D88-8E74-D93981E8DEC8}
 		{52BBC8A3-27A0-4B77-8F49-9E0A75FA0F57} = {DDF4B14E-F389-435B-B676-5EEA67A3C599}
 		{EA14094F-FB55-5ABC-1402-B4229C4AD0B1} = {F8EA7040-D8AE-4B7C-B2CA-61E7983A5022}
+		{11A57DB0-619E-40B5-84C6-2CD0148FB0F4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{3E75AF90-1C50-4EC4-A724-0DC52720E90A} = {11A57DB0-619E-40B5-84C6-2CD0148FB0F4}
+		{67D3BA68-2015-4B74-8D9E-0F1A1C7760BB} = {11A57DB0-619E-40B5-84C6-2CD0148FB0F4}
+		{EC8C857A-DE3E-4692-B358-78C39280767E} = {11A57DB0-619E-40B5-84C6-2CD0148FB0F4}
+		{BA8DC491-9714-4A50-B4B2-FB83803A9BF8} = {11A57DB0-619E-40B5-84C6-2CD0148FB0F4}
+		{9D8D6BA5-5A84-4548-A636-CCD57995724C} = {11A57DB0-619E-40B5-84C6-2CD0148FB0F4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8700A014-0453-4CE8-A762-95A9A99A71F1}
