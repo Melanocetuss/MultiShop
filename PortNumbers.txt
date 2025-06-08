@@ -1,0 +1,4 @@
+IdentityServer --> 5001
+Catalog --> 7127
+Discount --> 7128
+Order --> 7129

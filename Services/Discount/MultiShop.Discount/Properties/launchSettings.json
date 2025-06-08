@@ -1,4 +1,5 @@
-﻿{
+﻿// Discount Service Launch Settings
+{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
@@ -14,7 +15,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5286",
+      "applicationUrl": "https://localhost:7128",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -22,9 +23,9 @@
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7177;http://localhost:5286",
+      "applicationUrl": "https://localhost:7128",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
