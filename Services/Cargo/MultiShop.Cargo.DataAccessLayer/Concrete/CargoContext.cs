@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MultiShop.Cargo.EntitiesLayer.Entities;
+using MultiShop.Cargo.EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

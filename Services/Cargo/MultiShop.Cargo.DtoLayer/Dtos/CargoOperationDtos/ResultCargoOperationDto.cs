@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiShop.Cargo.EntityLayer.Entities
+namespace MultiShop.Cargo.DtoLayer.Dtos.CargoOperationDtos
 {
-    public class CargoOperation
+    public class ResultCargoOperationDto
     {
         public int CargoOperationID { get; set; }
         public string Barcode { get; set; }

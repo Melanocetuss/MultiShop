@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiShop.Cargo.EntityLayer.Entities
+namespace MultiShop.Cargo.DtoLayer.Dtos.CargoCompanyDtos
 {
-    public class CargoCompany
+    public class GetCargoCompanyByIdDto
     {
         public int CargoCompanyID { get; set; }
         public string CargoCompanyName { get; set; }

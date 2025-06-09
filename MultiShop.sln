@@ -35,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.IdentityServer", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cargo", "Cargo", "{11A57DB0-619E-40B5-84C6-2CD0148FB0F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Cargo.EntitiesLayer", "Services\Cargo\MultiShop.Cargo.EntitiesLayer\MultiShop.Cargo.EntitiesLayer.csproj", "{3E75AF90-1C50-4EC4-A724-0DC52720E90A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Cargo.EntityLayer", "Services\Cargo\MultiShop.Cargo.EntitiesLayer\MultiShop.Cargo.EntityLayer.csproj", "{3E75AF90-1C50-4EC4-A724-0DC52720E90A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Cargo.BusinessLayer", "Services\Cargo\MultiShop.Cargo.BusinessLayer\MultiShop.Cargo.BusinessLayer.csproj", "{67D3BA68-2015-4B74-8D9E-0F1A1C7760BB}"
 EndProject
