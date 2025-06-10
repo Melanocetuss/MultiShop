@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/UILayout.cshtml";
+}
+
+<!-- Carousel -->
+@await Component.InvokeAsync("_CarouselDefaultComponentPartial")
+
+<!-- Featured -->
+@await Component.InvokeAsync("_FeaturedDefaultComponentPartial")
+
+<!-- Categories -->
+@await Component.InvokeAsync("_CategoriesDefaultComponentPartial")
+
+<!-- Featured Products -->
+@await Component.InvokeAsync("_FeaturedProductsDefaultComponentPartial")
+
+<!-- Special Offer -->
+@await Component.InvokeAsync("_SpecialOfferDefaultComponentPartial")
+
+<!-- Vendor -->
+@await Component.InvokeAsync("_VendorDefaultComponentPartial")

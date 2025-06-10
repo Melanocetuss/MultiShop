@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head -->
+@await Component.InvokeAsync("_HeadUILayoutComponentPartial")
+
+<body>
+
+    <!-- Topbar -->
+    @await Component.InvokeAsync("_TopbarUILayoutComponentPartial")
+        
+    <!-- Navbar Start -->
+    @await Component.InvokeAsync("_NavbarUILayoutComponentPartial")
+
+    <!-- Breadcrumb -->
+    @await Component.InvokeAsync("_BreadcrumbUILayoutComponentPartial")
+           
+    @RenderBody()
+    
+    <!-- Footer -->
+    @await Component.InvokeAsync("_FooterUILayoutComponentPartial")
+
+    <!-- Script -->
+    @await Component.InvokeAsync("_ScriptUILayoutComponentPartial")
+
+</body>
+</html>
