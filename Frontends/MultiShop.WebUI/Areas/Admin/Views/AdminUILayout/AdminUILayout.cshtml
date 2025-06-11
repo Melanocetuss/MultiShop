@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+@await Component.InvokeAsync("_HeadAdminUILayoutComponentPartial")
+
+<body class="sidebar-mini">
+    <div class="wrapper">
+        <!-- Header -->
+        @await Component.InvokeAsync("_HeaderAdminUILayoutComponentPartial")
+        
+        <!-- Sidebar -->
+        @await Component.InvokeAsync("_SidebarAdminUILayoutComponentPartial")        
+       
+        <div class="content-wrapper">                     
+            <!-- Content Header -->
+            @await Component.InvokeAsync("_ContentHeaderAdminUILayoutComponentPartial")
+
+            <!-- Main Content-->
+            @RenderBody()
+
+        </div>
+
+        <!-- Footer -->
+        @await Component.InvokeAsync("_FooterAdminUILayoutComponentPartial")        
+    </div>
+    <!-- Script -->
+    @await Component.InvokeAsync("_ScriptAdminUILayoutComponentPartial")
+
+</body>
+</html>
