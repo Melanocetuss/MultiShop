@@ -38,7 +38,6 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.index1 = "Ana Sayfa";
             ViewBag.index2 = "Kategoriler";
             ViewBag.index3 = "Kategori Ekleme";
-
             return View();
         }
 
