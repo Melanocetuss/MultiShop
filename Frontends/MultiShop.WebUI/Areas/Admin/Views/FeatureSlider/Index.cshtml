@@ -1,0 +1,67 @@
+﻿@model List<ResultFeatureSliderDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminUILayout/AdminUILayout.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <a href="/Admin/FeatureSlider/CreateFeatureSlider/" class="btn btn-light mb-3">
+                    <i class="fa fa-plus me-1"></i> Yeni Öne Çıkan
+                </a>
+
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 120px;">Resim</th>
+                                    <th>Başlık</th>
+                                    <th>Açıklama</th>
+                                    <th>Durum</th>
+                                    <th style="width: 240px;">İlgili İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="@item.ImageUrl" alt="Ürün Resmi" style="width:100px; height:80px;" />
+                                        </td>
+                                        <td>@item.Title</td>
+                                        <td class="text-truncate" style="max-width: 250px;">
+                                            @item.Description
+                                        </td>
+                                        <td>
+                                            @if(item.Status == false)
+                                            {
+                                                <a href="/Admin/FeatureSlider/ChangeStatus/@item.FeatureSliderID" class="btn btn-danger btn-sm">Pasif</a>
+                                            }                                            
+                                            else
+                                            {
+                                                <a href="/Admin/FeatureSlider/ChangeStatus/@item.FeatureSliderID" class="btn btn-success btn-sm">Aktif</a>
+                                            }
+
+                                        </td>
+                                        <td>                                           
+                                            <a href="/Admin/FeatureSlider/UpdateFeatureSlider/@item.FeatureSliderID" class="btn btn-warning">
+                                                <i class="fa fa-pencil"></i> Güncelle
+                                            </a>
+                                            <a href="/Admin/FeatureSlider/DeleteFeatureSlider/@item.FeatureSliderID" class="btn btn-danger"
+                                               onclick="return confirm('Silmek istediğinize emin misiniz?');">
+                                                <i class="fa fa-trash"></i> Kaldır
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

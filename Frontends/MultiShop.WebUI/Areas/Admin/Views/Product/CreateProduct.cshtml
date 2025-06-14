@@ -12,10 +12,10 @@
                     <form method="post">
 
                         <label>Ürün Resmi</label>
-                        <input type="text" class="form-control" placeholder="Kategori Adı Giriniz" asp-for="ProductImageUrl" /><br />
+                        <input type="text" class="form-control" placeholder="Ürün Resmi Linkini Giriniz" asp-for="ProductImageUrl" /><br />
                         
                         <label>Ürün Adı</label>
-                        <input type="text" class="form-control" placeholder="Kategori Adı Giriniz" asp-for="ProductName" /><br />
+                        <input type="text" class="form-control" placeholder="Ürün Adı Giriniz" asp-for="ProductName" /><br />
                         
                         <label>Ürün Kategorisi</label>
                         @Html.DropDownListFor(model => model.CategoryID, (SelectList)ViewBag.Categories, new { @class = "form-control", style = "height: 38px;" })
