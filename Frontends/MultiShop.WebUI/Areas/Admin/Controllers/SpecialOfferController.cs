@@ -63,7 +63,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteSpecialOffer(string id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:7127/api/SpecialOffers/GetSpecialOfferById?SpecialOfferID={id}");
+            var responseMessage = await client.DeleteAsync($"https://localhost:7127/api/SpecialOffers?SpecialOfferID={id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "SpecialOffer", new { Area = "Admin" });

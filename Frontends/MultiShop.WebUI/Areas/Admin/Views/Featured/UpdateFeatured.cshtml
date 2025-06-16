@@ -1,0 +1,29 @@
+﻿@model UpdateFeaturedDto
+@{
+    ViewData["Title"] = "UpdateFeatured";
+    Layout = "~/Areas/Admin/Views/AdminUILayout/AdminUILayout.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+
+                        <input type="hidden" readonly asp-for="FeaturedID" />
+                        <label>Özellik Başlığı</label>
+                        <input type="text" class="form-control" placeholder="Özellik Başlığı Giriniz" asp-for="Title" />
+                        <br />
+
+                        <label>Özellik İkonu</label>
+                        <input type="text" class="form-control" placeholder="Özellik İkonu Giriniz" asp-for="Icon" />
+                        <br />
+
+                        <button class="btn btn-primary"> Özelliği Güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
