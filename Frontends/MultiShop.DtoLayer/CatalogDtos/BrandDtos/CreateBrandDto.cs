@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiShop.DtoLayer.CatalogDtos.CategoryDtos
+namespace MultiShop.DtoLayer.CatalogDtos.BrandDtos
 {
-    public class CreateCategoryDto
+    public class CreateBrandDto
     {
-        public string CategoryName { get; set; }
+        public string BrandName { get; set; }
         public string ImageUrl { get; set; }
     }
 }

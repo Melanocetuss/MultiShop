@@ -1,6 +1,6 @@
-﻿@model CreateCategoryDto
+﻿@model CreateBrandDto
 @{
-    ViewData["Title"] = "CreateCategory";
+    ViewData["Title"] = "CreateBrand";
     Layout = "~/Areas/Admin/Views/AdminUILayout/AdminUILayout.cshtml";
 }
 
@@ -10,16 +10,16 @@
             <div class="chart-box">
                 <div class="bs-example" data-example-id="bordered-table">
                     <form method="post">
-                        
-                        <label>Kategori Adı</label>
-                        <input type="text" class="form-control" placeholder="Kategori Adı Giriniz" asp-for="CategoryName"/>
 
-                        <label>Kategori Resmi Url</label>
+                        <label>Marka Adı</label>
+                        <input type="text" class="form-control" placeholder="Kategori Adı Giriniz" asp-for="BrandName" />
+
+                        <label>Marka Resmi Url</label>
                         <input type="text" class="form-control" placeholder="Kategori Resmi Url Giriniz" asp-for="ImageUrl" />
 
                         <br />
-                        <button class="btn btn-primary"><i class="fa fa-plus me-1"></i> Yeni Kategori</button>
-                    </form>                 
+                        <button class="btn btn-primary">Yeni Marka</button>
+                    </form>
                 </div>
             </div>
         </div>

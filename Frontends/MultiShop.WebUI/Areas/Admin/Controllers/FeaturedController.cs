@@ -15,6 +15,11 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.PageTitle = "Özellik Listesi";
+            ViewBag.index1 = "Ana Sayfa";
+            ViewBag.index2 = "Özellikler";
+            ViewBag.index3 = "Özellik Listesi";
+
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7127/api/Featureds");
             if (responseMessage.IsSuccessStatusCode)

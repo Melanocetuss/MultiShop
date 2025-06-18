@@ -8,19 +8,17 @@ namespace MultiShop.Catalog.Services.ProductServices
 {
     public class ProductService : IProductService
     {
-        private readonly IMapper _mapper;
         private readonly IMongoCollection<Product> _productCollection;
         private readonly IMongoCollection<Category> _categoryCollection;
+        private readonly IMapper _mapper;      
 
-
-        public ProductService(IMapper mapper, IDatabaseSettings _databaseSettings)
-        {
+        public ProductService(IMapper mapper, IDatabaseSettings databaseSettings)
+        {            
+            var client = new MongoClient(databaseSettings.ConnectionString);
+            var database = client.GetDatabase(databaseSettings.DatabaseName);
+            _productCollection = database.GetCollection<Product>(databaseSettings.ProductCollectionName);
+            _categoryCollection = database.GetCollection<Category>(databaseSettings.CategoryCollectionName);
             _mapper = mapper;
-            var client = new MongoClient(_databaseSettings.ConnectionString);
-            var database = client.GetDatabase(_databaseSettings.DatabaseName);
-            _productCollection = database.GetCollection<Product>(_databaseSettings.ProductCollectionName);
-            _categoryCollection = database.GetCollection<Category>(_databaseSettings.CategoryCollectionName);
-            
         }
 
         public async Task CreateProductAsync(CreateProductDto createProductDto)

@@ -10,12 +10,12 @@ namespace MultiShop.Catalog.Services.ProductImageServices
     {
         private readonly IMapper _mapper;
         private readonly IMongoCollection<ProductImage> _productImageCollection;
-        public ProductImageService(IMapper mapper, IDatabaseSettings _databaseSettings)
-        {
+        public ProductImageService(IMapper mapper, IDatabaseSettings databaseSettings)
+        {          
+            var client = new MongoClient(databaseSettings.ConnectionString);
+            var database = client.GetDatabase(databaseSettings.DatabaseName);
+            _productImageCollection = database.GetCollection<ProductImage>(databaseSettings.ProductImageCollectionName);
             _mapper = mapper;
-            var client = new MongoClient(_databaseSettings.ConnectionString);
-            var database = client.GetDatabase(_databaseSettings.DatabaseName);
-            _productImageCollection = database.GetCollection<ProductImage>(_databaseSettings.ProductImageCollectionName);
         }
 
         public async Task CreateProductImageAsync(CreateProductImageDto createProductImageDto)

@@ -8,14 +8,15 @@ namespace MultiShop.Catalog.Services.ProductDetailServices
 {
     public class ProductDetailService : IProductDetailService
     {
-        private readonly IMapper _mapper;
         private readonly IMongoCollection<ProductDetail> _productDetailCollection;
-        public ProductDetailService(IMapper mapper, IDatabaseSettings _databaseSettings)
-        {
+        private readonly IMapper _mapper;
+        
+        public ProductDetailService(IMapper mapper, IDatabaseSettings databaseSettings)
+        {            
+            var client = new MongoClient(databaseSettings.ConnectionString);
+            var database = client.GetDatabase(databaseSettings.DatabaseName);
+            _productDetailCollection = database.GetCollection<ProductDetail>(databaseSettings.ProductDetailCollectionName);
             _mapper = mapper;
-            var client = new MongoClient(_databaseSettings.ConnectionString);
-            var database = client.GetDatabase(_databaseSettings.DatabaseName);
-            _productDetailCollection = database.GetCollection<ProductDetail>(_databaseSettings.ProductDetailCollectionName);
         }
 
         public async Task CreateProductDetailAsync(CreateProductDetailDto createProductDetailDto)
