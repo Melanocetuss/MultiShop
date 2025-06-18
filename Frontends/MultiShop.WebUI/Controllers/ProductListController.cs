@@ -4,10 +4,11 @@ namespace MultiShop.WebUI.Controllers
 {
     public class ProductListController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string CategoryID)
         {
             ViewBag.FirstBreadcrump = "Ana Sayfa";
             ViewBag.SecondBreadcrump = "Ürün Listesi";
+            ViewBag.CategoryID = CategoryID;
             return View();
         }
 

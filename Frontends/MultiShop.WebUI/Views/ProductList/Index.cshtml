@@ -26,7 +26,7 @@
                 @await Component.InvokeAsync("_SortingProductCountProductListComponentPartial")               
                 
                 <!-- Product List-->
-                @await Component.InvokeAsync("_ProductListComponentPartial")
+                @await Component.InvokeAsync("_ProductListComponentPartial", new { CategoryID = ViewBag.CategoryID })
                                
                 <!-- Pagination -->
                 @await Component.InvokeAsync("_PaginationProductListComponentPartial")

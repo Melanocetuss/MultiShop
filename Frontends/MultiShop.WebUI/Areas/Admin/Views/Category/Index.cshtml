@@ -15,6 +15,7 @@
                             <tr>
                                 <th style="width: 120px;">Resim</th>
                                 <th>Kategori Adı</th>
+                                <th>Ürünleri Gör</th>
                                 <th style="width: 240px;">İlgili İşlemler</th>
                             </tr>
                         </thead>
@@ -24,8 +25,9 @@
                                 <tr>
                                     <th class="text-center"><img src="@item.ImageUrl" style="width:100px; height:80px;" /></th>
                                     <td>@item.CategoryName</td>
+                                    <td><a href="/Admin/Category/GetAllProductByCategoryId/@item.CategoryID" class="btn btn-info"><i class="fa fa-info"></i> Ürünleri Gör</a></td>
                                     <td>
-                                        <a href="/Admin/Category/UpdateCategory/@item.CategoryID" class="btn btn-warning me-2"><i class="fa fa-pencil"></i> Güncelle</a>
+                                        <a href="/Admin/Category/UpdateCategory/@item.CategoryID" class="btn btn-warning"><i class="fa fa-pencil"></i> Güncelle</a>
                                         <a href="/Admin/Category/DeleteCategory/@item.CategoryID" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');"><i class="fa fa-trash"></i> Kaldır</a>
                                     </td>
                                 </tr>

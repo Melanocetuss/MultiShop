@@ -100,5 +100,23 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> GetAllProductByCategoryId(string id)
+        {
+            ViewBag.PageTitle = "Kategorinin Ürünleri";
+            ViewBag.index1 = "Ana Sayfa";
+            ViewBag.index2 = "Kategoriler";
+            ViewBag.index3 = "Kategorinin Ürünleri";
+
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"https://localhost:7127/api/Products/GetAllProductByCategoryId?CategoryID={id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultProductByCategoryIdDto>>(jsonData);
+                return View(values);
+            }
+            return View();
+        }
     }
 }
