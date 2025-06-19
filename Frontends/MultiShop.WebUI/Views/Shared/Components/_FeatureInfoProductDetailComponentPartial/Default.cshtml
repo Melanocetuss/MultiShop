@@ -1,6 +1,8 @@
-﻿<div class="col-lg-7 h-auto mb-30">
+﻿@model ResultProductDto
+
+<div class="col-lg-7 h-auto mb-30">
     <div class="h-100 bg-light p-30">
-        <h3>Canon Hd 414 Kamera</h3>
+        <h3>@Model.ProductName</h3>
         <div class="d-flex mb-3">
             <div class="text-primary mr-2">
                 <small class="fas fa-star"></small>
@@ -9,14 +11,12 @@
                 <small class="fas fa-star-half-alt"></small>
                 <small class="far fa-star"></small>
             </div>
-            <small class="pt-1">(99 Değerlendirme)</small>
+            <small class="pt-1">(0 Değerlendirme)</small>
         </div>
-        <h3 class="font-weight-semi-bold mb-4">21554.90₺</h3>
-        <p class="mb-4">
-            4k ve 1080 60 fps video çekim desteği, 20.1 megapiksel CMOS sensör, DIGIC 8 görüntü işlemcisi, Dual Pixel AF sistemi
-            ile hızlı ve hassas odaklama, 3.0 inç dokunmatik LCD ekran, Wi-Fi ve Bluetooth bağlantı özellikleri ile Canon Hd 414 Kamera,
-            profesyonel fotoğrafçılık ve videografi için ideal bir seçimdir.
-        </p>
+        <h3 class="font-weight-semi-bold mb-4">@Model.ProductPrice₺</h3>
+        <p class="mb-4">@Model.ProductDescription</p>
+
+        <!-- Size -->
         <div class="d-flex mb-3">
             <strong class="text-dark mr-3">Sizes:</strong>
             <form>
@@ -42,6 +42,8 @@
                 </div>
             </form>
         </div>
+        
+        <!-- Color -->
         <div class="d-flex mb-4">
             <strong class="text-dark mr-3">Colors:</strong>
             <form>
@@ -67,6 +69,8 @@
                 </div>
             </form>
         </div>
+
+        <!-- Add Basket-->
         <div class="d-flex align-items-center mb-4 pt-2">
             <div class="input-group quantity mr-3" style="width: 130px;">
                 <div class="input-group-btn">
@@ -85,6 +89,8 @@
                 <i class="fa fa-shopping-cart mr-1"></i> Sepete Ekle
             </button>
         </div>
+
+        <!-- Share -->
         <div class="d-flex pt-2">
             <strong class="text-dark mr-2">Paylaş:</strong>
             <div class="d-inline-flex">
@@ -102,5 +108,6 @@
                 </a>
             </div>
         </div>
+
     </div>
 </div>

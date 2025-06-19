@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
+using MultiShop.DtoLayer.CatalogDtos.ProductImageDtos;
 using Newtonsoft.Json;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
@@ -71,7 +73,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7127/api/Products", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "Product", new { Area = "Admin" });
+                return RedirectToAction("Index", "Product", new { Area = "Admin" });               
             }
             return View();
         }

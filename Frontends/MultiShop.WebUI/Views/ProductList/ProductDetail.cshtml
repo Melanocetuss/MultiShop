@@ -7,10 +7,10 @@
 <div class="container-fluid pb-5">    
     <div class="row px-xl-5">        
         <!-- Image Slider -->
-        @await Component.InvokeAsync("_ImageSliderProductDetailComponentPartial")
+        @await Component.InvokeAsync("_ImageSliderProductDetailComponentPartial", new { ProductID = ViewBag.ProductID })
         
         <!-- Feature Info -->
-        @await Component.InvokeAsync("_FeatureInfoProductDetailComponentPartial")       
+        @await Component.InvokeAsync("_FeatureInfoProductDetailComponentPartial", new { ProductID = ViewBag.ProductID })
     </div>
 
     <div class="row px-xl-5">

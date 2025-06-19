@@ -25,7 +25,7 @@ namespace MultiShop.Catalog.Controllers
             return Ok(values);
         }
 
-        [HttpGet("GetCategoryById")]
+        [HttpGet("GetProductImageById")]
         public async Task<IActionResult> GetProductImageById(string ProductImageID)
         {
             var values = await _ProductImageService.GetByIdProductImageAsync(ProductImageID);
@@ -51,6 +51,13 @@ namespace MultiShop.Catalog.Controllers
         {
             await _ProductImageService.UpdateProductImageAsync(updateProductImageDto);
             return Ok("Ürün Resimi Güncelleme İşlemi Başarıyla Gerçekleşti.");
+        }
+
+        [HttpGet("GetProductImageByProductId")]
+        public async Task<IActionResult> GetProductImageByProductId(string ProductID) 
+        {
+            var values = await _ProductImageService.GetProductImageByProductIdAsync(ProductID);
+            return Ok(values);
         }
     }
 }

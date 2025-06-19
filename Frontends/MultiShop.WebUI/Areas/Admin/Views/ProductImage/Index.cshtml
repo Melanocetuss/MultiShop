@@ -1,0 +1,33 @@
+﻿@model GetProductImageByProductIdDto
+@{
+    Layout = "~/Areas/Admin/Views/AdminUILayout/AdminUILayout.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <div class="card-body p-0">
+                    <table class="table table-hover table-striped align-middle mb-0 ">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 120px;">Görsel 1</th>
+                                <th style="width: 120px;">Görsel 2</th>
+                                <th style="width: 120px;">Görsel 3</th>
+                                <th style="width: 120px;">Görsel 4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <th class="text-center"><img src="@Model.Image1" style="width:350px; height:350px;" /></th>
+                                    <th class="text-center"><img src="@Model.Image2" style="width:350px; height:350px;" /></th>
+                                    <th class="text-center"><img src="@Model.Image3" style="width:350px; height:350px;" /></th>
+                                    <th class="text-center"><img src="@Model.Image4" style="width:350px; height:350px;" /></th>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

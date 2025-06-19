@@ -12,10 +12,11 @@ namespace MultiShop.WebUI.Controllers
             return View();
         }
 
-        public IActionResult ProductDetail()
+        public IActionResult ProductDetail(string ProductID)
         {
             ViewBag.FirstBreadcrump = "Ana Sayfa";
             ViewBag.SecondBreadcrump = "Ürün Detayları";
+            ViewBag.ProductID = ProductID;
             return View();
         }
     }
