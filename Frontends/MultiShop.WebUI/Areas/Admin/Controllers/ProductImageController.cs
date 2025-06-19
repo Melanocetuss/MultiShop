@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductImageDtos;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
@@ -75,6 +77,6 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
                 return RedirectToAction("ProductImageList", "ProductImage", new { Area = "Admin" });
             }
             return View();
-        }
+        }       
     }
 }
