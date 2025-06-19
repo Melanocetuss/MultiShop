@@ -44,7 +44,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpGet("Admin/ProductImage/UpdateProductImage/{ProductImageID}")]
         public async Task<IActionResult> UpdateProductImage(string ProductImageID)
         {
             ViewBag.PageTitle = "Ürün Görseli Güncelleme";
@@ -72,7 +72,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             var responseMessage = await client.PutAsync("https://localhost:7127/api/ProductImages", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "ProductImage", new { Area = "Admin" });
+                return RedirectToAction("ProductImageList", "ProductImage", new { Area = "Admin" });
             }
             return View();
         }
