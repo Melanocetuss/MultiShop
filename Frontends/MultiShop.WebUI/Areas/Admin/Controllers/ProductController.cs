@@ -149,7 +149,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
                         var newImage = new CreateProductImageDto
                         {
                             ProductID = item.ProductID,
-                            Image1 = "",
+                            Image1 = item.ProductImageUrl,
                             Image2 = "",
                             Image3 = "",
                             Image4 = ""
