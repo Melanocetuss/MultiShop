@@ -160,16 +160,10 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 
                         var content = new StringContent(JsonConvert.SerializeObject(newImage), Encoding.UTF8, "application/json");
                         var createResponse = await client.PostAsync("https://localhost:7127/api/ProductImages", content);
-
-                        if (!createResponse.IsSuccessStatusCode)
-                        {
-                        }
                     }
                 }
-
                 return null;
             }
-
             return null;
         }
 
@@ -194,15 +188,10 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
                     if (!productExists)
                     {
                         var deleteResponse = await client.DeleteAsync($"https://localhost:7127/api/ProductImages?ProductImageID={productImage.ProductImageID}");
-                        if (!deleteResponse.IsSuccessStatusCode)
-                        {
-                        }
                     }
                 }
-
                 return null;
             }
-
             return null;
         }
 
@@ -235,16 +224,10 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 
                         var content = new StringContent(JsonConvert.SerializeObject(newProductDetail), Encoding.UTF8, "application/json");
                         var createResponse = await client.PostAsync("https://localhost:7127/api/ProductDetails", content);
-
-                        if (!createResponse.IsSuccessStatusCode)
-                        {
-                        }
                     }
                 }
-
                 return null;
             }
-
             return null;
         }
 
@@ -269,15 +252,10 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
                     if (!productExists)
                     {
                         var deleteResponse = await client.DeleteAsync($"https://localhost:7127/api/ProductDetails?ProductDetailID={productDetail.ProductDetailID}");
-                        if (!deleteResponse.IsSuccessStatusCode)
-                        {                           
-                        }
                     }
                 }
-
                 return null;
             }
-
             return null;
         }
     }
