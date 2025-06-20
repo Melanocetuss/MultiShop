@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
+using MultiShop.DtoLayer.CatalogDtos.ProductDetailDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductImageDtos;
 using Newtonsoft.Json;
@@ -74,6 +75,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 await CheckProductAndAddNewProductImage();
+                await CheckProductAndAddNewProductDetail();
                 return RedirectToAction("Index", "Product", new { Area = "Admin" });               
             }
             return View();
@@ -86,6 +88,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 await CheckProductAndDeleteProductImages();
+                await CheckProductAndDeleteProductDetail();
                 return RedirectToAction("Index", "Product", new { Area = "Admin" });
             }
             return View();
@@ -160,15 +163,14 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 
                         if (!createResponse.IsSuccessStatusCode)
                         {
-                            Console.WriteLine($"HATA: {item.ProductID} için görsel eklenemedi.");
                         }
                     }
                 }
 
-                return RedirectToAction("ProductImageList", "ProductImage", new { Area = "Admin" });
+                return null;
             }
 
-            return BadRequest("Ürün listesi alınamadı.");
+            return null;
         }
 
         [HttpGet]
@@ -194,16 +196,89 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
                         var deleteResponse = await client.DeleteAsync($"https://localhost:7127/api/ProductImages?ProductImageID={productImage.ProductImageID}");
                         if (!deleteResponse.IsSuccessStatusCode)
                         {
-                            Console.WriteLine($"Silme hatası: ProductImageID = {productImage.ProductImageID}");
                         }
                     }
                 }
 
-                return RedirectToAction("ProductImageList", "ProductImage", new { Area = "Admin" });
+                return null;
             }
 
-            return BadRequest("Ürün veya görsel listesi alınamadı.");
+            return null;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> CheckProductAndAddNewProductDetail()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var productResponseMessage = await client.GetAsync("https://localhost:7127/api/Products");
+
+            if (productResponseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await productResponseMessage.Content.ReadAsStringAsync();
+                var productList = JsonConvert.DeserializeObject<List<ResultProductDto>>(jsonData);
+
+                foreach (var item in productList)
+                {
+                    var productDetailResponseMessage = await client.GetAsync(
+                        $"https://localhost:7127/api/ProductDetails/GetProductDetailByProductId?ProductID={item.ProductID}");
+
+                    // 204 veya başarısız ise görsel yok demektir, yeni görsel ekle
+                    if (productDetailResponseMessage.StatusCode == System.Net.HttpStatusCode.NoContent
+                        || !productDetailResponseMessage.IsSuccessStatusCode)
+                    {
+                        var newProductDetail = new CreateProductDetailDto
+                        {
+                            ProductID = item.ProductID,
+                            ProductDescription = item.ProductDescription,
+                            ProductInfo = ""
+                        };
+
+                        var content = new StringContent(JsonConvert.SerializeObject(newProductDetail), Encoding.UTF8, "application/json");
+                        var createResponse = await client.PostAsync("https://localhost:7127/api/ProductDetails", content);
+
+                        if (!createResponse.IsSuccessStatusCode)
+                        {
+                        }
+                    }
+                }
+
+                return null;
+            }
+
+            return null;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CheckProductAndDeleteProductDetail()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var productResponseMessage = await client.GetAsync("https://localhost:7127/api/Products");
+            var productDetailResponseMessage = await client.GetAsync("https://localhost:7127/api/ProductDetails");
+
+            if (productResponseMessage.IsSuccessStatusCode && productDetailResponseMessage.IsSuccessStatusCode)
+            {
+                var productJsonData = await productResponseMessage.Content.ReadAsStringAsync();
+                var productList = JsonConvert.DeserializeObject<List<ResultProductDto>>(productJsonData);
+
+                var productDetailJsonData = await productDetailResponseMessage.Content.ReadAsStringAsync();
+                var productDetailList = JsonConvert.DeserializeObject<List<ResultProductDetailDto>>(productDetailJsonData);
+
+                foreach (var productDetail in productDetailList)
+                {
+                    bool productExists = productList.Exists(p => p.ProductID == productDetail.ProductID);
+                    if (!productExists)
+                    {
+                        var deleteResponse = await client.DeleteAsync($"https://localhost:7127/api/ProductDetails?ProductDetailID={productDetail.ProductDetailID}");
+                        if (!deleteResponse.IsSuccessStatusCode)
+                        {                           
+                        }
+                    }
+                }
+
+                return null;
+            }
+
+            return null;
+        }
     }
 }

@@ -47,5 +47,11 @@ namespace MultiShop.Catalog.Services.ProductDetailServices
             var values = _mapper.Map<ProductDetail>(updateProductDetailDto);
             await _productDetailCollection.FindOneAndReplaceAsync(x => x.ProductDetailID == updateProductDetailDto.ProductDetailID, values);
         }
+
+        public async Task<GetProductDetailByProductId> GetProductDetailByProductIdAsync(string ProductID)
+        {
+            var values = await _productDetailCollection.Find(x => x.ProductID == ProductID).FirstOrDefaultAsync();
+            return _mapper.Map<GetProductDetailByProductId>(values);
+        }
     }
 }

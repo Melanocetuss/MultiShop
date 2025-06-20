@@ -22,7 +22,6 @@
                                     <th>Ürün Açıklaması</th> 
                                     <th>Kategorisi</th>
                                     <th>Ürün Fiyatı</th>
-                                    <th>Ürün Görseleri</th>
                                     <th style="width: 240px;">İlgili İşlemler</th>
                                 </tr>
                             </thead>
@@ -38,13 +37,7 @@
                                             @item.ProductDescription
                                         </td>
                                         <td>@item.CategoryName</td>
-                                        <td>@item.ProductPrice ₺</td>
-                                        
-                                        <td>
-                                            <a href="/Admin/ProductImage/Index?ProductID=@item.ProductID" class="btn btn-info btn-sm">
-                                                <i class="fa fa-info"></i> Görselere Git
-                                            </a>
-                                        </td>
+                                        <td>@item.ProductPrice ₺</td>                                                                              
 
                                         <td>
                                             <a href="/Admin/Product/UpdateProduct/@item.ProductID" class="btn btn-warning">
