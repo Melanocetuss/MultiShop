@@ -32,15 +32,20 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             }
             return View();
         }
-
-        public async Task<IActionResult> ProductImageList() 
+        [Route("/Admin/ProductImage/ProductImageList/{ProductID}")]
+        public async Task<IActionResult> ProductImageList(string ProductID) 
         {
+            ViewBag.PageTitle = "Ürünün Görseleri";
+            ViewBag.index1 = "Ana Sayfa";
+            ViewBag.index2 = "Ürün Görseli";
+            ViewBag.index3 = "Ürünün Görselerini Düzenle";
+
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7127/api/ProductImages");
-            if (responseMessage.IsSuccessStatusCode)
+            var responseMessage = await client.GetAsync($"https://localhost:7127/api/ProductImages/GetProductImageByProductId?ProductID={ProductID}");
+            if (responseMessage.IsSuccessStatusCode) 
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultProductImageDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<GetProductImageByProductIdDto>(jsonData);
                 return View(values);
             }
             return View();

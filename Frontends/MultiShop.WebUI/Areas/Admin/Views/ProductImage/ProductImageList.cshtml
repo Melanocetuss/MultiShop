@@ -1,4 +1,4 @@
-﻿@model List<ResultProductImageDto>
+﻿@model GetProductImageByProductIdDto
 @{
     ViewData["Title"] = "ProductImageList";
     Layout = "~/Areas/Admin/Views/AdminUILayout/AdminUILayout.cshtml";
@@ -21,21 +21,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <th class="text-center"><img src="@item.Image1" style="width:100px; height:80px;" /></th>
-                                    <th class="text-center"><img src="@item.Image2" style="width:100px; height:80px;" /></th>
-                                    <th class="text-center"><img src="@item.Image3" style="width:100px; height:80px;" /></th>
-                                    <th class="text-center"><img src="@item.Image4" style="width:100px; height:80px;" /></th>                                
-                                    <td>
-                                        <a href="/Admin/ProductImage/Index?ProductID=@item.ProductID" class="btn btn-info btn-sm"><i class="fa fa-info"></i> Görselere Git</a>
-                                    </td>
-                                    <td>
-                                        <a href="/Admin/ProductImage/UpdateProductImage/@item.ProductImageID" class="btn btn-warning"><i class="fa fa-pencil"></i> Güncelle</a>
-                                    </td>
-                                </tr>
-                            }
+                            <tr>
+                                <th class="text-center"><img src="@Model.Image1" style="width:100px; height:80px;" /></th>
+                                <th class="text-center"><img src="@Model.Image2" style="width:100px; height:80px;" /></th>
+                                <th class="text-center"><img src="@Model.Image3" style="width:100px; height:80px;" /></th>
+                                <th class="text-center"><img src="@Model.Image4" style="width:100px; height:80px;" /></th>
+                                <td>
+                                    <a href="/Admin/ProductImage/Index?ProductID=@Model.ProductID" class="btn btn-info btn-sm"><i class="fa fa-info"></i> Görselere Git</a>
+                                </td>
+                                <td>
+                                    <a href="/Admin/ProductImage/UpdateProductImage/@Model.ProductImageID" class="btn btn-warning"><i class="fa fa-pencil"></i> Güncelle</a>
+                                </td>
+                            </tr>
+                                
                         </tbody>
                     </table>
                 </div>

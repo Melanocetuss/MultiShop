@@ -12,8 +12,9 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-
-        public async Task<IActionResult> Index()
+        
+        [Route("/Admin/ProductDetail/index/{ProductID}")]
+        public async Task<IActionResult> Index(string ProductID)
         {
             ViewBag.PageTitle = "Ürün Detayları Listesi";
             ViewBag.index1 = "Ana Sayfa";
@@ -21,11 +22,11 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.index3 = "Ürün Detayları Listesi";
 
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7127/api/ProductDetails");
+            var responseMessage = await client.GetAsync($"https://localhost:7127/api/ProductDetails/GetProductDetailByProductId?ProductID={ProductID}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultProductDetailDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<GetByIdProductDetailDto>(jsonData);
                 return View(values);
             }
             return View();

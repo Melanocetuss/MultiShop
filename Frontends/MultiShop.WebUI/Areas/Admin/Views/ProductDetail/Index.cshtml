@@ -1,4 +1,4 @@
-﻿@model List<ResultProductDetailDto>
+﻿@model GetByIdProductDetailDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/AdminUILayout/AdminUILayout.cshtml";
@@ -17,17 +17,14 @@
                                 <th style="width: 240px;">İlgili İşlemler</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>@item.ProductDescription</td>
-                                    <td>@item.ProductInfo</td>                                   
-                                    <td>
-                                        <a href="/Admin/ProductDetail/UpdateProductDetail/@item.ProductDetailID" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Güncelle</a>
-                                    </td>
-                                </tr>
-                            }
+                        <tbody>                            
+                            <tr>
+                                <td>@Model.ProductDescription</td>
+                                <td>@Model.ProductInfo</td>
+                                <td>
+                                    <a href="/Admin/ProductDetail/UpdateProductDetail/@Model.ProductDetailID" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Güncelle</a>
+                                </td>
+                            </tr>               
                         </tbody>
                     </table>
                 </div>
