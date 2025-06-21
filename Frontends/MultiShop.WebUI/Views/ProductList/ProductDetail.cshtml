@@ -24,10 +24,10 @@
                 </div>
                 <div class="tab-content">
                     <!-- Description -->
-                    @await Component.InvokeAsync("_DescriptionProductDetailComponentPartial")                   
+                    @await Component.InvokeAsync("_DescriptionProductDetailComponentPartial", new { ProductID = ViewBag.ProductID })
 
                     <!-- Additional Information -->
-                    @await Component.InvokeAsync("_AdditionalInformationProductDetailComponentPartial")                    
+                    @await Component.InvokeAsync("_AdditionalInformationProductDetailComponentPartial", new { ProductID = ViewBag.ProductID })
 
                     <!-- Review -->
                     @await Component.InvokeAsync("_ReviewProductDetailComponentPartial")                    
