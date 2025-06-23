@@ -41,7 +41,7 @@ namespace MultiShop.WebUI.Controllers
         {
             createCommentDto.ImageUrl = "https://cdn-icons-png.flaticon.com/512/9203/9203764.png";
             createCommentDto.CreatedDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            createCommentDto.Status = false;           
+            createCommentDto.Status = true;           
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createCommentDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
