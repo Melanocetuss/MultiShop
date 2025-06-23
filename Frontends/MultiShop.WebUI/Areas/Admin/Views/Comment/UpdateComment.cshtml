@@ -1,0 +1,45 @@
+﻿@model UpdateCommentDto
+@{
+    ViewData["Title"] = "UpdateComment";
+    Layout = "~/Areas/Admin/Views/AdminUILayout/AdminUILayout.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        
+                        <input type="hidden" readonly asp-for="UserCommentID" />
+                        <input type="hidden" readonly asp-for="ProductID" />
+
+                        <label>Kullanıcı Adı</label>
+                        <input type="text" class="form-control" placeholder="Kullanıcı Adı Giriniz" asp-for="Username" /><br />
+
+                        <label>Kullanıc Resmi Url</label>
+                        <input type="text" class="form-control" placeholder="Kullanıcı Resmi Url Giriniz" asp-for="ImageUrl" /><br />
+
+                        <label>Email</label>
+                        <input type="email" class="form-control" placeholder="Email Giriniz" asp-for="Email" /><br />
+
+                        <label>Yorum</label>
+                        <textarea class="form-control" rows="5" placeholder="Yorumu Giriniz" asp-for="CommentDetail"></textarea><br />
+
+                        <label>Puan</label>
+                        <select class="form-control" asp-for="Rating">
+                            <option value="1"> 1</option>
+                            <option value="2"> 2</option>
+                            <option value="3"> 3</option>
+                            <option value="4"> 4</option>
+                            <option value="5"> 5</option>
+                        </select>
+                        <br />
+                       
+                        <button class="btn btn-primary"><i class="fa fa-plus me-1"></i> Güncele Yorumu Güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

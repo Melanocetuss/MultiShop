@@ -1,0 +1,64 @@
+﻿@model List<ResultCommentDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminUILayout/AdminUILayout.cshtml";
+    int count = 0;
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <div class="card-body p-0">
+                    <table class="table table-hover table-striped align-middle mb-0 ">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 15px;">#</th>
+                                <th>Kullanıcı Adı</th>
+                                <th>Yorum</th>
+                                <th>Tarih</th>
+                                <th>Durum</th>
+                                <th style="width: 240px;">İlgili İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th class="text-center">@count</th>
+                                    <td>@item.Username</td>
+                                    <td>@item.CommentDetail</td>
+                                    <td>@item.CreatedDate.ToShortDateString()</td>
+                                    
+                                    <td>
+                                        @if (item.Status == false)
+                                        {
+                                            <a href="/Admin/Comment/CommentChangeStatus/@item.UserCommentID" class="btn btn-danger btn-sm">Pasif</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Admin/Comment/CommentChangeStatus/@item.UserCommentID" class="btn btn-success btn-sm">Aktif</a>
+                                        }
+
+                                    </td>
+                                    
+                                    <td>
+                                        <a href="/Admin/Comment/UpdateComment/@item.UserCommentID" class="btn btn-warning">
+                                            <i class="fa fa-pencil"></i> Güncelle
+                                        </a>
+                                        <a href="/Admin/Comment/DeleteComment/@item.UserCommentID" class="btn btn-danger"
+                                           onclick="return confirm('Silmek istediğinize emin misiniz?');">
+                                            <i class="fa fa-trash"></i> Kaldır
+                                        </a>
+                                    </td>
+                                   
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

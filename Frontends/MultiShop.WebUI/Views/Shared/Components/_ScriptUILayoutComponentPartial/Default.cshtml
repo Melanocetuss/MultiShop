@@ -10,3 +10,39 @@
 
 <!-- Template Javascript -->
 <script src="~/online-shop-website-template/js/main.js"></script>
+
+<!-- Product Review Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const stars = document.querySelectorAll('#rating-stars i');
+        const ratingInput = document.getElementById('Rating');
+
+        function setRating(rating) {
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('far');
+                    star.classList.add('fas');
+                    star.style.color = 'gold';
+                } else {
+                    star.classList.remove('fas');
+                    star.classList.add('far');
+                    star.style.color = 'gray';
+                }
+            });
+        }
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = parseInt(star.getAttribute('data-value'));
+                ratingInput.value = rating;
+                setRating(rating);
+            });
+        });
+
+        // Modelde varsa başlangıç puanını göster
+        const initialRating = parseInt(ratingInput.value);
+        if (!isNaN(initialRating) && initialRating > 0) {
+            setRating(initialRating);
+        }
+    });
+</script>

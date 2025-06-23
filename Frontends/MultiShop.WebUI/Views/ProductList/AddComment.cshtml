@@ -1,0 +1,40 @@
+﻿@model CreateCommentDto
+
+<div class="col-md-6">
+    <h4 class="mb-4">Yorum Yapın</h4>
+    <small>E-posta adresiniz yayınlanmayacak. Gerekli alanlar "*" ile işaretlenmiştir.</small>
+    <form method="post" asp-action="AddComment" asp-controller="ProductList">
+
+        <input type="hidden" readonly asp-for="ProductID" />
+
+        <div class="form-group">
+            <label for="name">Adınız *:</label>
+            <input type="text" class="form-control" id="name" asp-for="Username" name="Username" />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Adresiniz *:</label>
+            <input type="email" class="form-control" id="email" asp-for="Email" name="Email" />
+        </div>
+
+        <div class="form-group">
+            <label>Puanınız *:</label>
+            <div id="rating-stars" style="cursor:pointer;">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    <i class="far fa-star" data-value="@i" style="font-size: 25px; color: gray; margin-right: 5px;"></i>
+                }
+            </div>
+            <input type="hidden" asp-for="Rating" id="Rating" />
+        </div>
+
+        <div class="form-group">
+            <label for="message">Yorumunuz *:</label>
+            <textarea id="message" cols="30" rows="5" class="form-control" asp-for="CommentDetail" name="CommentDetail"></textarea>
+        </div>
+
+        <div class="form-group mb-0">
+            <input type="submit" value="Yorum Yap" class="btn btn-primary px-3" />
+        </div>
+    </form>
+</div>
