@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.ContactDtos;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 namespace MultiShop.WebUI.Controllers
 {
@@ -16,7 +18,7 @@ namespace MultiShop.WebUI.Controllers
         {
             ViewBag.FirstBreadcrump = "Ana Sayfa";
             ViewBag.SecondBreadcrump = "İletişim";
-
+       
             createContactDto.SendDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             createContactDto.IsRead = false;
             var client = httpClientFactory.CreateClient();

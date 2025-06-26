@@ -70,7 +70,8 @@ namespace MultiShop.IdentityServer
                 ClientSecrets = { new Secret("multishopsecret".Sha256()) },
                 AllowedScopes = 
                 {
-                    "DiscountFullPermission"
+                    "CatalogFullPermission",
+                    "CatalogReadPermission"
                 }
             },
 
@@ -82,9 +83,10 @@ namespace MultiShop.IdentityServer
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                 ClientSecrets = { new Secret("multishopsecret".Sha256()) },
                 AllowedScopes = 
-                { 
+                {                    
+                    "CatalogFullPermission",
                     "CatalogReadPermission",
-                    "CatalogFullPermission" 
+                    "BasketFullPermission"
                 }
             },
 
