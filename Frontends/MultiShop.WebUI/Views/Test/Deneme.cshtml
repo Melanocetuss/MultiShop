@@ -13,9 +13,10 @@
             <th>#</th>
             <th>Kategori Adi</th>
         </tr>
-        @foreach(var item in Model)
+        @foreach (var item in Model)
         {
             <tr>
+                <td>@item.CategoryID</td>
                 <td>@item.CategoryName</td>
             </tr>
         }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MultiShop.WebUI.Handlers;
+using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
 using MultiShop.WebUI.Services.Concrete;
 using MultiShop.WebUI.Services.Interfaces;
 using MultiShop.WebUI.Settings;
@@ -8,7 +9,8 @@ using MultiShop.WebUI.Settings;
 var builder = WebApplication.CreateBuilder(args);
 
 #region Registeration
-// Identity
+
+// Silinicek olan servis
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
@@ -21,6 +23,7 @@ builder.Services
         opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
         opt.Cookie.Name = "MultiShopJwt";
     });
+// Silinicek olan servis
 
 // Discovery
 builder.Services
@@ -32,6 +35,9 @@ builder.Services
         opt.Cookie.Name = "MultiShopCookie";
         opt.SlidingExpiration = true;
     });
+
+builder.Services.AddAccessTokenManagement();
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
@@ -40,12 +46,20 @@ builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection(
 
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
+
 var serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
 
 builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 {
     opt.BaseAddress = new Uri(serviceApiSettings.IdentityServerUrl);
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{serviceApiSettings.OcelotUrl}/{serviceApiSettings.Catalog.Path}/");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
 #endregion
 

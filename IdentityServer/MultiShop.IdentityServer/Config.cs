@@ -101,7 +101,9 @@ namespace MultiShop.IdentityServer
                     "CargoFullPermission",
                     "BasketFullPermission",
                     "CommentFullPermission",
-                    "ImagesFullPermission"
+                    "ImagesFullPermission",
+                    "OcelotFullPermission"
+                    
                 }
             },
 

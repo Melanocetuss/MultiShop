@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
+using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net.Http;
@@ -10,17 +11,19 @@ namespace MultiShop.WebUI.Controllers
     public class TestController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        public TestController(IHttpClientFactory httpClientFactory)
+        private readonly ICategoryService _catgoryService;
+        public TestController(IHttpClientFactory httpClientFactory, ICategoryService catgoryService)
         {
             _httpClientFactory = httpClientFactory;
+            _catgoryService = catgoryService;
         }
 
         public async Task<IActionResult> Index()
         {
-            string token="";
-            using(var httpClient = new HttpClient())
+            string token = "";
+            using (var httpClient = new HttpClient())
             {
-                var request = new HttpRequestMessage 
+                var request = new HttpRequestMessage
                 {
                     RequestUri = new Uri("http://localhost:5001/connect/token"),
                     Method = HttpMethod.Post,
@@ -28,7 +31,7 @@ namespace MultiShop.WebUI.Controllers
                     {
                         { "client_id", "MultiShopVisitorId" },
                         { "client_secret", "multishopsecret" },
-                        { "grant_type", "client_credentials" },              
+                        { "grant_type", "client_credentials" },
                     })
                 };
 
@@ -53,6 +56,12 @@ namespace MultiShop.WebUI.Controllers
                 return View(values);
             }
             return View();
+        }
+
+        public async Task<IActionResult> Deneme()
+        {
+            var values = await _catgoryService.GetAllCategoryAsync();
+            return View(values);
         }
     }
 }
