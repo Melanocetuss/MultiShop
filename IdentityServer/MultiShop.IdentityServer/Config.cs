@@ -37,6 +37,26 @@ namespace MultiShop.IdentityServer
                 Scopes = { "BasketFullPermission" }
             },
 
+            new ApiResource("ResourceComment")
+            {
+                Scopes = { "CommentFullPermission" }
+            },
+
+            new ApiResource("ResourcePayment")
+            {
+                Scopes = { "PaymentFullPermission" }
+            },
+
+            new ApiResource("ResourceImages")
+            {
+                Scopes = { "ImagesFullPermission" }
+            },           
+
+            new ApiResource("ResourceOcelot")
+            {
+                Scopes = { "OcelotFullPermission" }
+            },
+
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
 
         };
@@ -56,6 +76,10 @@ namespace MultiShop.IdentityServer
             new ApiScope("OrderFullPermission", "Full authority for order operations"),
             new ApiScope("CargoFullPermission", "Full authority for cargo operations"),
             new ApiScope("BasketFullPermission", "Full authority for basket operations"),
+            new ApiScope("CommentFullPermission", "Full authority for comment operations"),
+            new ApiScope("PaymentFullPermission", "Full authority for payment operations"),
+            new ApiScope("ImagesFullPermission", "Full authority for images operations"),
+            new ApiScope("OcelotFullPermission", "Full authority for ocelot operations"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName, "Local API Scope")
         };
 
@@ -71,7 +95,11 @@ namespace MultiShop.IdentityServer
                 AllowedScopes = 
                 {
                     "CatalogFullPermission",
-                    "CatalogReadPermission"
+                    "CatalogReadPermission",
+                    "CommentFullPermission",
+                    "PaymentFullPermission",
+                    "ImagesFullPermission",
+                    "OcelotFullPermission"
                 }
             },
 
@@ -86,7 +114,11 @@ namespace MultiShop.IdentityServer
                 {                    
                     "CatalogFullPermission",
                     "CatalogReadPermission",
-                    "BasketFullPermission"
+                    "BasketFullPermission",
+                    "CommentFullPermission",
+                    "PaymentFullPermission",
+                    "ImagesFullPermission",
+                    "OcelotFullPermission"
                 }
             },
 
@@ -105,6 +137,10 @@ namespace MultiShop.IdentityServer
                     "OrderFullPermission",
                     "CargoFullPermission",
                     "BasketFullPermission",
+                    "CommentFullPermission",
+                    "PaymentFullPermission",
+                    "ImagesFullPermission",
+                    "OcelotFullPermission",
                     IdentityServerConstants.LocalApi.ScopeName,
                     IdentityServerConstants.StandardScopes.Email,
                     IdentityServerConstants.StandardScopes.OpenId,
