@@ -4,6 +4,8 @@ using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductDetailDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductImageDtos;
+using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
+using MultiShop.WebUI.Services.CatalogServices.ProductServices;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,54 +16,35 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        public ProductController(IHttpClientFactory httpClientFactory)
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
+        public ProductController(IHttpClientFactory httpClientFactory, IProductService productService, ICategoryService categoryService)
         {
             _httpClientFactory = httpClientFactory;
+            _productService = productService;
+            _categoryService = categoryService;
         }
 
         private async Task<List<ResultCategoryDto>> GetCategoryList()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7127/api/Categories");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
-                return values;
-            }
-            return null;
+            var values = await _categoryService.GetAllCategoryAsync();
+            return values;
         }
 
         public async Task<IActionResult> Index()
         {
-            ViewBag.PageTitle = "Ürün Listesi";
-            ViewBag.index1 = "Ana Sayfa";
-            ViewBag.index2 = "Ürünler";
-            ViewBag.index3 = "Ürün Listesi";
+            ProductViewBag();
 
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7127/api/Products/GetAllProductWithCategory");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultProductWithCategoryDto>>(jsonData);
-                return View(values);
-            }
-
-            return View();
+            var values = await _productService.GetAllProductWithCategoryAsync();
+            return View(values);
         }
 
         [HttpGet]
         public async Task<IActionResult> CreateProduct()
         {
-            ViewBag.PageTitle = "Ürün Ekle";
-            ViewBag.index1 = "Ana Sayfa";
-            ViewBag.index2 = "Ürünler";
-            ViewBag.index3 = "Ürün Ekle";
-
+            ProductViewBag();
             var categoryList = await GetCategoryList();
             ViewBag.Categories = new SelectList(categoryList, "CategoryID", "CategoryName");
-
             return View();
         }
 
@@ -83,6 +66,13 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> DeleteProduct(string id)
         {
+            /* 
+               Refactoring:
+               await _productService.DeleteProductAsync(id); 
+               need if IsSuccessStatusCode == 200 Run 
+               await CheckProductAndDeleteProductImages();
+               await CheckProductAndDeleteProductDetail();
+            */
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.DeleteAsync($"https://localhost:7127/api/Products?ProductID={id}");
             if (responseMessage.IsSuccessStatusCode)
@@ -97,10 +87,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateProduct(string id)
         {
-            ViewBag.PageTitle = "Ürün Güncelle";
-            ViewBag.index1 = "Ana Sayfa";
-            ViewBag.index2 = "Ürünler";
-            ViewBag.index3 = "Ürün Güncelle";
+            ProductViewBag();
             var categoryList = await GetCategoryList();
             ViewBag.Categories = new SelectList(categoryList, "CategoryID", "CategoryName");
 
@@ -257,6 +244,14 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
                 return null;
             }
             return null;
+        }
+
+        void ProductViewBag() 
+        {
+            ViewBag.PageTitle = "Ürün İşlemleri";
+            ViewBag.index1 = "Ana Sayfa";
+            ViewBag.index2 = "Ürünler";
+            ViewBag.index3 = "Ürün İşlemleri";
         }
     }
 }
