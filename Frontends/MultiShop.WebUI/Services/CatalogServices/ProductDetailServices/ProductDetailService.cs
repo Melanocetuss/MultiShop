@@ -1,4 +1,6 @@
 ﻿using MultiShop.DtoLayer.CatalogDtos.ProductDetailDtos;
+using MultiShop.DtoLayer.CatalogDtos.ProductImageDtos;
+using Newtonsoft.Json;
 
 namespace MultiShop.WebUI.Services.CatalogServices.ProductDetailServices
 {
@@ -37,8 +39,31 @@ namespace MultiShop.WebUI.Services.CatalogServices.ProductDetailServices
         public async Task<GetByIdProductDetailDto> GetProductDetailByProductIdAsync(string ProductID)
         {
             var responseMessage = await _httpClient.GetAsync($"ProductDetails/GetProductDetailByProductId?ProductID={ProductID}");
-            var values = await responseMessage.Content.ReadFromJsonAsync<GetByIdProductDetailDto>();
-            return values;
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var content = await responseMessage.Content.ReadAsStringAsync();
+                
+                if (string.IsNullOrWhiteSpace(content))
+                {
+                    // Boş içerik varsa null dön
+                    return null;
+                }
+
+                // JSON varsa deserialize et
+                var values = JsonConvert.DeserializeObject<GetByIdProductDetailDto>(content);
+
+                return values;
+            }
+            else if (responseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                // Bulunamadıysa null dön
+                return null;
+            }
+            else
+            {
+                throw new Exception($"API çağrısında hata: {responseMessage.StatusCode}");
+            }
         }
 
         public async Task UpdateProductDetailAsync(UpdateProductDetailDto updateProductDetailDto)
