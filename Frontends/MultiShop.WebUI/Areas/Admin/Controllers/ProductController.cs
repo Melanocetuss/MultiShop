@@ -5,6 +5,7 @@ using MultiShop.DtoLayer.CatalogDtos.ProductDetailDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductImageDtos;
 using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
+using MultiShop.WebUI.Services.CatalogServices.ProductImageServices;
 using MultiShop.WebUI.Services.CatalogServices.ProductServices;
 using Newtonsoft.Json;
 using System.Text;
@@ -18,11 +19,14 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
-        public ProductController(IHttpClientFactory httpClientFactory, IProductService productService, ICategoryService categoryService)
+        private readonly IProductImageService _productImageService;
+
+        public ProductController(IHttpClientFactory httpClientFactory, IProductService productService, ICategoryService categoryService, IProductImageService productImageService)
         {
             _httpClientFactory = httpClientFactory;
             _productService = productService;
             _categoryService = categoryService;
+            _productImageService = productImageService;
         }
 
         private async Task<List<ResultCategoryDto>> GetCategoryList()
@@ -51,34 +55,23 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createProductDto);
-            StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7127/api/Products", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
+            var response = await _productService.CreateProductAsync(createProductDto);
+            if (response.IsSuccessStatusCode)
             {
                 await CheckProductAndAddNewProductImage();
-                await CheckProductAndAddNewProductDetail();
-                return RedirectToAction("Index", "Product", new { Area = "Admin" });               
+                //await CheckProductAndAddNewProductDetail();
+                return RedirectToAction("Index", "Product", new { Area = "Admin" });
             }
             return View();
         }
 
         public async Task<IActionResult> DeleteProduct(string id)
         {
-            /* 
-               Refactoring:
-               await _productService.DeleteProductAsync(id); 
-               need if IsSuccessStatusCode == 200 Run 
-               await CheckProductAndDeleteProductImages();
-               await CheckProductAndDeleteProductDetail();
-            */
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:7127/api/Products?ProductID={id}");
-            if (responseMessage.IsSuccessStatusCode)
+            var response = await _productService.DeleteProductAsync(id);
+            if (response.IsSuccessStatusCode)
             {
                 await CheckProductAndDeleteProductImages();
-                await CheckProductAndDeleteProductDetail();
+                //await CheckProductAndDeleteProductDetail();
                 return RedirectToAction("Index", "Product", new { Area = "Admin" });
             }
             return View();
@@ -90,96 +83,91 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ProductViewBag();
             var categoryList = await GetCategoryList();
             ViewBag.Categories = new SelectList(categoryList, "CategoryID", "CategoryName");
-
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7127/api/Products/GetProductById?ProductID={id}");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var productDto = JsonConvert.DeserializeObject<UpdateProductDto>(jsonData);               
-                return View(productDto);
-            }
-            return View();
+            var values = await _productService.GetByIdProductAsync(id);
+            return View(values);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateProductDto);
-            StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7127/api/Products", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index", "Product", new { Area = "Admin" });
-            }
-            return View();
+            await _productService.UpdateProductAsync(updateProductDto);
+            return RedirectToAction("Index", "Product", new { Area = "Admin" });
         }
 
+        // Need Refactoring
         [HttpGet]
         public async Task<IActionResult> CheckProductAndAddNewProductImage()
         {
-            var client = _httpClientFactory.CreateClient();
-            var productResponseMessage = await client.GetAsync("https://localhost:7127/api/Products");
-
-            if (productResponseMessage.IsSuccessStatusCode)
+            try
             {
-                var jsonData = await productResponseMessage.Content.ReadAsStringAsync();
-                var productList = JsonConvert.DeserializeObject<List<ResultProductDto>>(jsonData);
+                var products = await _productService.GetAllProductAsync();
 
-                foreach (var item in productList)
+                if (products == null || products.Count == 0)
+                    return NotFound("Hiç ürün bulunamadı.");
+
+                int createdCount = 0;
+
+                foreach (var product in products)
                 {
-                    var productImageResponseMessage = await client.GetAsync(
-                        $"https://localhost:7127/api/ProductImages/GetProductImageByProductId?ProductID={item.ProductID}");
+                    var productImage = await _productImageService.GetProductImageByProductIdAsync(product.ProductID);
 
-                    // 204 veya başarısız ise görsel yok demektir, yeni görsel ekle
-                    if (productImageResponseMessage.StatusCode == System.Net.HttpStatusCode.NoContent
-                        || !productImageResponseMessage.IsSuccessStatusCode)
+                    // Görsel yoksa ve ürünün görsel URL'si varsa ekle
+                    if (productImage == null && !string.IsNullOrEmpty(product.ProductImageUrl))
                     {
-                        var newImage = new CreateProductImageDto
+                        var newImageDto = new CreateProductImageDto
                         {
-                            ProductID = item.ProductID,
-                            Image1 = item.ProductImageUrl,
-                            Image2 = "",
-                            Image3 = "",
-                            Image4 = ""
+                            ProductID = product.ProductID,
+                            Image1 = product.ProductImageUrl,
+                            Image2 = "null",
+                            Image3 = "null",
+                            Image4 = "null"
                         };
 
-                        var content = new StringContent(JsonConvert.SerializeObject(newImage), Encoding.UTF8, "application/json");
-                        var createResponse = await client.PostAsync("https://localhost:7127/api/ProductImages", content);
+                        await _productImageService.CreateProductImageAsync(newImageDto);
+                        createdCount++;
                     }
                 }
-                return null;
+
+                return Ok($"{createdCount} ürün için yeni görsel oluşturuldu.");
             }
-            return null;
+            catch (Exception ex)
+            {
+                // Loglama eklenebilir
+                return StatusCode(500, "Sunucu hatası: " + ex.Message);
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> CheckProductAndDeleteProductImages()
         {
-            var client = _httpClientFactory.CreateClient();
-            var productResponseMessage = await client.GetAsync("https://localhost:7127/api/Products");
-            var productImageResponseMessage = await client.GetAsync("https://localhost:7127/api/ProductImages");
-
-            if (productResponseMessage.IsSuccessStatusCode && productImageResponseMessage.IsSuccessStatusCode)
+            try
             {
-                var productJsonData = await productResponseMessage.Content.ReadAsStringAsync();
-                var productList = JsonConvert.DeserializeObject<List<ResultProductDto>>(productJsonData);
+                var products = await _productService.GetAllProductAsync();
+                var productImages = await _productImageService.GetAllProductImageAsync();
 
-                var productImageJsonData = await productImageResponseMessage.Content.ReadAsStringAsync();
-                var productImageList = JsonConvert.DeserializeObject<List<ResultProductImageDto>>(productImageJsonData);
+                if (products == null || productImages == null)
+                    return NotFound("Ürünler veya ürün görselleri bulunamadı.");
 
-                foreach (var productImage in productImageList)
+                int deletedCount = 0;
+
+                foreach (var productImage in productImages)
                 {
-                    bool productExists = productList.Exists(p => p.ProductID == productImage.ProductID);
+                    bool productExists = products.Exists(p => p.ProductID == productImage.ProductID);
+
                     if (!productExists)
                     {
-                        var deleteResponse = await client.DeleteAsync($"https://localhost:7127/api/ProductImages?ProductImageID={productImage.ProductImageID}");
+                        await _productImageService.DeleteProductImageAsync(productImage.ProductImageID);
+                        deletedCount++;
                     }
                 }
-                return null;
+
+                return Ok($"{deletedCount} ürün görseli, ilgili ürün bulunamadığı için silindi.");
             }
-            return null;
+            catch (Exception ex)
+            {
+                // Burada loglama yapılabilir
+                return StatusCode(500, "Sunucu hatası: " + ex.Message);
+            }
         }
 
         [HttpGet]
@@ -245,6 +233,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             }
             return null;
         }
+        // Need Refactoring
 
         void ProductViewBag() 
         {

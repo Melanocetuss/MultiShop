@@ -3,7 +3,6 @@
     ViewData["Title"] = "ProductImageList";
     Layout = "~/Areas/Admin/Views/AdminUILayout/AdminUILayout.cshtml";
 }
-
 <section class="content container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -22,10 +21,10 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th class="text-center"><img src="@Model.Image1" style="width:100px; height:80px;" /></th>
-                                <th class="text-center"><img src="@Model.Image2" style="width:100px; height:80px;" /></th>
-                                <th class="text-center"><img src="@Model.Image3" style="width:100px; height:80px;" /></th>
-                                <th class="text-center"><img src="@Model.Image4" style="width:100px; height:80px;" /></th>
+                                <th class="text-center"><img src="@Model.Image1" alt="@Model.Image1" style="width:100px; height:80px;" /></th>
+                                <th class="text-center"><img src="@Model.Image2" alt="@Model.Image2" style="width:100px; height:80px;" /></th>
+                                <th class="text-center"><img src="@Model.Image3" alt="@Model.Image3" style=" width:100px; height:80px;" /></th>
+                                <th class="text-center"><img src="@Model.Image4" alt="@Model.Image4" style="width:100px; height:80px;" /></th>
                                 <td>
                                     <a href="/Admin/ProductImage/Index?ProductID=@Model.ProductID" class="btn btn-info btn-sm"><i class="fa fa-info"></i> Görselere Git</a>
                                 </td>

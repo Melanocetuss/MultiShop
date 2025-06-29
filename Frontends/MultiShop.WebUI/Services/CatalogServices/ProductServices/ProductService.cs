@@ -11,34 +11,34 @@ namespace MultiShop.WebUI.Services.CatalogServices.ProductServices
             _httpClient = httpClient;
         }
 
-        public async Task CreateProductAsync(CreateProductDto createProductDto)
+        public async Task<HttpResponseMessage> CreateProductAsync(CreateProductDto createProductDto)
         {
-            await _httpClient.PostAsJsonAsync<CreateProductDto>("Products", createProductDto);
+            return await _httpClient.PostAsJsonAsync<CreateProductDto>("Products", createProductDto);
         }
 
-        public async Task DeleteProductAsync(string ProductID)
+        public async Task<HttpResponseMessage> DeleteProductAsync(string ProductID)
         {
-            await _httpClient.DeleteAsync($"Products?ProductID={ProductID}");
+            return await _httpClient.DeleteAsync($"Products?ProductID={ProductID}");
         }
 
-        public Task<List<ResultProductDto>> GetAllProductAsync()
+        public async Task<List<ResultProductDto>> GetAllProductAsync()
         {
-            var responseMessage = _httpClient.GetAsync("Products");
-            var values = responseMessage.Result.Content.ReadFromJsonAsync<List<ResultProductDto>>();
+            var responseMessage = await _httpClient.GetAsync("Products");
+            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultProductDto>>();
             return values;
         }
 
-        public Task<List<ResultProductByCategoryIdDto>> GetAllProductByCategoryIdAsync(string CategoryID)
+        public async Task<List<ResultProductByCategoryIdDto>> GetAllProductByCategoryIdAsync(string CategoryID)
         {
-            var responseMessage = _httpClient.GetAsync($"Products/GetAllProductByCategoryId?CategoryID={CategoryID}");
-            var values = responseMessage.Result.Content.ReadFromJsonAsync<List<ResultProductByCategoryIdDto>>();
+            var responseMessage = await _httpClient.GetAsync($"Products/GetAllProductByCategoryId?CategoryID={CategoryID}");
+            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultProductByCategoryIdDto>>();
             return values;
         }
 
-        public Task<List<ResultProductWithCategoryDto>> GetAllProductWithCategoryAsync()
+        public async Task<List<ResultProductWithCategoryDto>> GetAllProductWithCategoryAsync()
         {
-            var responseMessage = _httpClient.GetAsync("Products/GetAllProductWithCategory");
-            var values = responseMessage.Result.Content.ReadFromJsonAsync<List<ResultProductWithCategoryDto>>();
+            var responseMessage = await _httpClient.GetAsync("Products/GetAllProductWithCategory");
+            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultProductWithCategoryDto>>();
             return values;
         }
 
