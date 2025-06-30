@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MultiShop.Comment.Context;
@@ -6,6 +7,7 @@ using MultiShop.Comment.Entities;
 
 namespace MultiShop.Comment.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CommentsController : ControllerBase
@@ -66,7 +68,7 @@ namespace MultiShop.Comment.Controllers
         }
 
         [HttpGet("GetCommentByProductID")]
-        public async Task<IActionResult> GetCommentById(string ProductID)
+        public async Task<IActionResult> GetCommentByProductID(string ProductID)
         {
             var values = await _commentContext.UserComments.Where(x => x.ProductID == ProductID).ToListAsync();
             return Ok(values);

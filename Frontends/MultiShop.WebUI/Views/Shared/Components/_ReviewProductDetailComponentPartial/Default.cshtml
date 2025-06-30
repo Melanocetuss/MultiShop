@@ -5,9 +5,11 @@
         ProductID = ViewBag.ProductID
     };
 }
+
 @{
     var activeComments = Model.Where(x => x.Status == true).ToList();
 }
+
 <div class="tab-pane fade" id="tab-pane-3">
     <div class="row">
         <!-- Review -->

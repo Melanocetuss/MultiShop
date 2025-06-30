@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CommentDtos;
+using MultiShop.WebUI.Services.CommentServices;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,10 +9,10 @@ namespace MultiShop.WebUI.Controllers
 {
     public class ProductListController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        public ProductListController(IHttpClientFactory httpClientFactory)
+        private readonly ICommentService _commentService;
+        public ProductListController(ICommentService commentService)
         {
-            _httpClientFactory = httpClientFactory;
+            _commentService = commentService;
         }
 
         public IActionResult Index(string CategoryID)
@@ -41,17 +42,9 @@ namespace MultiShop.WebUI.Controllers
         {
             createCommentDto.ImageUrl = "https://cdn-icons-png.flaticon.com/512/9203/9203764.png";
             createCommentDto.CreatedDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            createCommentDto.Status = true;           
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createCommentDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7132/api/Comments", stringContent);
-            if (responseMessage.IsSuccessStatusCode) 
-            {
-                return RedirectToAction("Index", "Default");
-            }
-
-            return View();
+            createCommentDto.Status = true;
+            await _commentService.CreateCommentAsync(createCommentDto);
+            return RedirectToAction("Index", "Default");
         }
     }
 }
