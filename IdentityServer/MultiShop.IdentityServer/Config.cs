@@ -58,7 +58,6 @@ namespace MultiShop.IdentityServer
             },
 
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
-
         };
 
         public static IEnumerable<IdentityResource> IdentityResources => new IdentityResource[]
@@ -102,8 +101,7 @@ namespace MultiShop.IdentityServer
                     "BasketFullPermission",
                     "CommentFullPermission",
                     "ImagesFullPermission",
-                    "OcelotFullPermission"
-                    
+                    "OcelotFullPermission"                   
                 }
             },
 

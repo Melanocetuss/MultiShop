@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MultiShop.WebUI.Handlers;
+using MultiShop.WebUI.Services.BasketServices;
 using MultiShop.WebUI.Services.CatalogServices.AboutServices;
 using MultiShop.WebUI.Services.CatalogServices.BrandServices;
 using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
@@ -21,18 +22,18 @@ var builder = WebApplication.CreateBuilder(args);
 #region Registeration
 
 // Silinicek olan servis
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
-    {
-        opt.LoginPath = "/Login/Index/";
-        opt.LogoutPath = "/Login/Logout/";
-        opt.AccessDeniedPath = "/Pages/AccessDenied/";
-        opt.Cookie.HttpOnly = true;
-        opt.Cookie.SameSite = SameSiteMode.Strict;
-        opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-        opt.Cookie.Name = "MultiShopJwt";
-    });
+//builder.Services
+//    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
+//    {
+//        opt.LoginPath = "/Login/Index/";
+//        opt.LogoutPath = "/Login/Logout/";
+//        opt.AccessDeniedPath = "/Pages/AccessDenied/";
+//        opt.Cookie.HttpOnly = true;
+//        opt.Cookie.SameSite = SameSiteMode.Strict;
+//        opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+//        opt.Cookie.Name = "MultiShopJwt";
+//    });
 // Silinicek olan servis
 
 // Discovery
@@ -67,7 +68,7 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
 
-    #region Catalog Services
+    #region Ocelot
     // Category Service
     builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
     {
@@ -134,6 +135,11 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
         opt.BaseAddress = new Uri($"{serviceApiSettings.OcelotUrl}/{serviceApiSettings.Comment.Path}/");
     }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
+    // Basket Service
+    builder.Services.AddHttpClient<IBasketService, BasketService>(opt =>
+    {
+        opt.BaseAddress = new Uri($"{serviceApiSettings.OcelotUrl}/{serviceApiSettings.Basket.Path}/");
+    }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 #endregion
 
 #endregion
@@ -158,13 +164,12 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Önce area routelari, sonra default route tanimlanir
 app.MapControllerRoute(
     name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area:exists}/{controller=Category}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.Run();
