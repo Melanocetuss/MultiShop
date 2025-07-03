@@ -16,14 +16,14 @@ namespace MultiShop.WebUI.Controllers
             _basketService = basketService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             ViewBag.FirstBreadcrump = "Ana Sayfa";
             ViewBag.SecondBreadcrump = "Sepetim";
-            var values = await _basketService.GetBasket();
-            return View(values);
+            return View();
         }
 
+        [Route("/ShopingCart/AddBasketItem/{productId}")]
         public async Task<IActionResult> AddBasketItem(string productId)
         {
             var values = await _productService.GetByIdProductAsync(productId);
@@ -31,6 +31,7 @@ namespace MultiShop.WebUI.Controllers
             {
                 ProductID = values.ProductID,
                 ProductName = values.ProductName,
+                ProductImageUrl = values.ProductImageUrl,
                 Price = values.ProductPrice,
                 Quantity = 1
             };
@@ -38,6 +39,7 @@ namespace MultiShop.WebUI.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("/ShopingCart/RemoveBasketItem/{productId}")]
         public async Task<IActionResult> RemoveBasketItem(string productId)
         {
             await _basketService.RemoveBasketItem(productId);
