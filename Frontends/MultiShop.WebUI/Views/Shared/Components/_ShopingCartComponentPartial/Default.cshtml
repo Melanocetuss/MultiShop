@@ -23,22 +23,21 @@
                     <td class="align-middle text-end" style="padding-right: 10px;">@item.Price</td>
 
                     <td class="align-middle text-end">
-                        <div class="d-flex justify-content-end align-items-center gap-1" style="width: 130px; margin-left: auto;">
-                            <button class="btn btn-primary" style="padding: 6px 12px; font-size: 1rem;">
-                                <i class="fa fa-minus"></i>
-                            </button>
-
-                            <input type="text" class="form-control bg-secondary border-0 text-center text-black" value="@item.Quantity"
-                                   style="width: 45px; height: 38px; font-size: 1rem; padding: 0 6px;">
-
-                            <button class="btn btn-primary" style="padding: 6px 12px; font-size: 1rem;">
-                                <i class="fa fa-plus"></i>
-                            </button>
+                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-primary btn-minus">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="@item.Quantity">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-primary btn-plus">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
                         </div>
                     </td>
-
                     <td class="align-middle text-end" style="padding-right: 10px;">@item.Price</td>
-
                     <td class="align-middle text-end">
                         <a href="/ShopingCart/RemoveBasketItem/@item.ProductID" class="btn btn-danger" style="padding: 8px 12px; font-size: 1rem;">
                             <i class="fa fa-times"></i>
