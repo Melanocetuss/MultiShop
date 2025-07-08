@@ -2,6 +2,8 @@
 using MultiShop.DtoLayer.BasketDtos;
 using MultiShop.WebUI.Services.BasketServices;
 using MultiShop.WebUI.Services.CatalogServices.ProductServices;
+using MultiShop.WebUI.Services.DiscountServices;
+using Newtonsoft.Json.Linq;
 
 namespace MultiShop.WebUI.Controllers
 {
@@ -16,16 +18,24 @@ namespace MultiShop.WebUI.Controllers
             _basketService = basketService;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(string code, decimal discountedPrice, decimal discountedTotalPrice)
         {
             ViewBag.FirstBreadcrump = "Ana Sayfa";
-            ViewBag.SecondBreadcrump = "Sepetim";
+            ViewBag.SecondBreadcrump = "Sepetim";                                    
             
-            var values = await _basketService.GetBasket();
-            ViewBag.TotalPrice = values.TotalPrice;
-
+            var basket = await _basketService.GetBasket();
+            
+            var PriceWithTax = basket.TotalPrice + (basket.TotalPrice /100 *18);
+            ViewBag.TotalPrice = basket.TotalPrice;                                   
+            ViewBag.Tax = PriceWithTax - basket.TotalPrice;         // Vergi tutarı
+            ViewBag.PriceWithTax = PriceWithTax;                   // Vergi dahil toplam fiyat
+            
+            ViewBag.DiscountedPrice = discountedPrice;            // İndirim tutarı
+            ViewBag.DiscountedTotalPrice = discountedTotalPrice; // İndirimli Toplam fiyat
+            ViewBag.Code = code;                                // İndirim kodu
             return View();
-        }
+        }       
 
         [Route("/ShopingCart/AddBasketItem/{productId}")]
         public async Task<IActionResult> AddBasketItem(string productId)
