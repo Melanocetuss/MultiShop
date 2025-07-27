@@ -29,6 +29,8 @@ Proje, servislerin **loosely coupled (gevşek bağlı)** olması prensibiyle gel
 - Swagger  
 - Postman  
 
+## 📸 Proje Resimleri
+
 ## 📁 Proje Yapısı
 
 ```text
@@ -45,15 +47,3 @@ MultiShop
 │
 ├── Identity
     └── MultiShop.Identity    → Identity Server kimlik doğrulama ve yetkilendirme
-
-
----
-
-## 👨‍💻 Geliştirici
-
-**Cesur Alphan Ellik**  
-[LinkedIn](https://www.linkedin.com/in/cesur-alphan-ellik-b0056a240/)  
-[GitHub](https://github.com/Melanocetuss)
-
----
-
