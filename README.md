@@ -1,3 +1,4 @@
+## 🚧 Geliştirmeye Devam Ediliyor
 ## 🛒 MultiShop
 
 MultiShop, .NET teknolojileriyle geliştirilmiş mikro servis mimarisine sahip bir e-ticaret uygulamasıdır.  
