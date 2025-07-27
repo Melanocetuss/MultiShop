@@ -38,7 +38,7 @@ MultiShop
 │   └── MultiShop.Detail
 │
 ├── ApiGateway
-│   └── MultiShop.Gateway
+│   └── MultiShop.OcelotGateway
 │
 ├── IdentityServer
 │   └── MultiShop.IdentityServer
