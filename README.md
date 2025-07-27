@@ -15,8 +15,6 @@ Proje, servislerin **loosely coupled (gevşek bağlı)** olması prensibiyle gel
 - AutoMapper, FluentValidation, Swagger entegrasyonu
 - SOLID prensipleriyle kodlama
 
----
-
 ## ⚙️ Kullanılan Teknolojiler
 
 - ASP.NET Core Web API  
