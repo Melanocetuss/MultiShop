@@ -32,13 +32,13 @@ Proje, servislerin **loosely coupled (gevşek bağlı)** olması prensibiyle gel
 MultiShop
 │
 ├── Services
-│   ├── MultiShop.Catalog     → Ürün listeleme servisi
-│   ├── MultiShop.Product     → Ürün işlemleri
-│   ├── MultiShop.Category    → Kategori işlemleri
-│   └── MultiShop.Detail      → Ürün detay servisi
+│   ├── MultiShop.Catalog
+│   ├── MultiShop.Product
+│   ├── MultiShop.Category
+│   └── MultiShop.Detail
 │
-├── Gateway
-│   └── MultiShop.Gateway     → Ocelot API Gateway yapılandırması
+├── ApiGateway
+│   └── MultiShop.Gateway
 │
-├── Identity
-    └── MultiShop.Identity    → Identity Server kimlik doğrulama ve yetkilendirme
+├── IdentityServer
+    └── MultiShop.IdentityServer
