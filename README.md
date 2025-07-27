@@ -45,7 +45,7 @@ MultiShop
 │   └── MultiShop.Gateway     → Ocelot API Gateway yapılandırması
 │
 ├── Identity
-│   └── MultiShop.Identity    → Identity Server kimlik doğrulama ve yetkilendirme
+    └── MultiShop.Identity    → Identity Server kimlik doğrulama ve yetkilendirme
 
 ---
 
