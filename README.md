@@ -1,4 +1,4 @@
-## 🛒 MultiShop - Microservice Based E-Commerce Backend
+## 🛒 MultiShop
 
 MultiShop, .NET teknolojileriyle geliştirilmiş mikro servis mimarisine sahip bir e-ticaret uygulamasıdır.  
 Ocelot API Gateway ve Identity Server kullanılarak kimlik doğrulama ve servisler arası geçiş yönetilirken, her modül bağımsız olarak yapılandırılmıştır.  
