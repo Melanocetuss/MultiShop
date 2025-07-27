@@ -10,7 +10,6 @@ Proje, servislerin **loosely coupled (gevşek bağlı)** olması prensibiyle gel
 - Ocelot ile API Gateway yönetimi
 - Identity Server ile kimlik doğrulama ve yetkilendirme
 - Entity Framework Core ile veritabanı işlemleri
-- AutoMapper, FluentValidation, Swagger entegrasyonu
 - SOLID prensipleriyle kodlama
 
 ## ⚙️ Kullanılan Teknolojiler
