@@ -16,7 +16,7 @@ Proje, servislerin **loosely coupled (gevşek bağlı)** olması prensibiyle gel
 
 - ASP.NET Core Web API  
 - Ocelot API Gateway  
-- Identity Server 4  
+- Identity Server 
 - Entity Framework Core  
 - SQL Server  
 - AutoMapper  
