@@ -46,8 +46,6 @@ MultiShop
 │
 ├── Identity
 │   └── MultiShop.Identity    → Identity Server kimlik doğrulama ve yetkilendirme
-│
-└── MultiShop.WebAPI          → Ortak API endpoint sunumu
 
 ---
 
