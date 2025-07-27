@@ -4,8 +4,6 @@ MultiShop, .NET teknolojileriyle geliştirilmiş mikro servis mimarisine sahip b
 Ocelot API Gateway ve Identity Server kullanılarak kimlik doğrulama ve servisler arası geçiş yönetilirken, her modül bağımsız olarak yapılandırılmıştır.  
 Proje, servislerin **loosely coupled (gevşek bağlı)** olması prensibiyle geliştirilmiştir.
 
----
-
 ## 🚀 Temel Özellikler
 
 - Microservice tabanlı yapı
