@@ -23,7 +23,7 @@ Proje, servislerin **loosely coupled (gevşek bağlı)** olması prensibiyle gel
 - FluentValidation  
 - Swagger  
 - Postman
-- Docker 🐳
+- Docker
 - Portainer (Container UI yönetimi)  
 
 ## 📸 Proje Resimleri
