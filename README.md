@@ -32,21 +32,22 @@ Proje, servislerin **loosely coupled (gevşek bağlı)** olması prensibiyle gel
 
 ## 📁 Proje Yapısı
 
+```text
 MultiShop
 │
 ├── Services
-│ ├── MultiShop.Catalog → Ürün listeleme servisi
-│ ├── MultiShop.Product → Ürün işlemleri
-│ ├── MultiShop.Category → Kategori işlemleri
-│ └── MultiShop.Detail → Ürün detay servisi
+│   ├── MultiShop.Catalog     → Ürün listeleme servisi
+│   ├── MultiShop.Product     → Ürün işlemleri
+│   ├── MultiShop.Category    → Kategori işlemleri
+│   └── MultiShop.Detail      → Ürün detay servisi
 │
 ├── Gateway
-│ └── MultiShop.Gateway → Ocelot API Gateway yapılandırması
+│   └── MultiShop.Gateway     → Ocelot API Gateway yapılandırması
 │
 ├── Identity
-│ └── MultiShop.Identity → Identity Server kimlik doğrulama ve yetkilendirme
+│   └── MultiShop.Identity    → Identity Server kimlik doğrulama ve yetkilendirme
 │
-└── MultiShop.WebAPI → Ortak API endpoint sunumu
+└── MultiShop.WebAPI          → Ortak API endpoint sunumu
 
 ---
 
