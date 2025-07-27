@@ -11,7 +11,6 @@ Proje, servislerin **loosely coupled (gevşek bağlı)** olması prensibiyle gel
 - Microservice tabanlı yapı
 - Ocelot ile API Gateway yönetimi
 - Identity Server ile kimlik doğrulama ve yetkilendirme
-- Her servis bağımsız katmanlı mimariye sahip (Controller, Business, DataAccess)
 - Entity Framework Core ile veritabanı işlemleri
 - AutoMapper, FluentValidation, Swagger entegrasyonu
 - SOLID prensipleriyle kodlama
