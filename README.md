@@ -41,4 +41,4 @@ MultiShop
 │   └── MultiShop.Gateway
 │
 ├── IdentityServer
-    └── MultiShop.IdentityServer
+│   └── MultiShop.IdentityServer
