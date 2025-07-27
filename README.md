@@ -46,6 +46,7 @@ MultiShop
 ├── Identity
     └── MultiShop.Identity    → Identity Server kimlik doğrulama ve yetkilendirme
 
+
 ---
 
 ## 👨‍💻 Geliştirici
